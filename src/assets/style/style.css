@@ -1,0 +1,424 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #050505;
+  color: white;
+}
+
+/* MAIN SECTION */
+
+.music-section {
+  min-height: 100vh;
+  padding: 90px 6%;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 0, 128, 0.12), transparent 30%),
+    radial-gradient(circle at 80% 70%, rgba(0, 255, 255, 0.12), transparent 30%),
+    #050505;
+  overflow: hidden;
+}
+
+/* HEADING */
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 55px;
+}
+
+.small-title {
+  display: inline-block;
+  font-size: 13px;
+  letter-spacing: 5px;
+  font-weight: 700;
+  margin-bottom: 15px;
+
+  background: linear-gradient(
+    90deg,
+    #ff0080,
+    #ff8a00,
+    #ffff00,
+    #00ff88,
+    #00c8ff,
+    #8b5cff,
+    #ff0080
+  );
+
+  background-size: 300% auto;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: rainbowText 5s linear infinite;
+}
+
+.section-heading h1 {
+  font-size: clamp(45px, 7vw, 90px);
+  line-height: 0.95;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: -4px;
+}
+
+.section-heading h1 span {
+  background: linear-gradient(
+    90deg,
+    #ff0080,
+    #ff8a00,
+    #ffff00,
+    #00ff88,
+    #00c8ff,
+    #8b5cff,
+    #ff0080
+  );
+
+  background-size: 300% auto;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: rainbowText 5s linear infinite;
+}
+
+.section-heading p {
+  max-width: 550px;
+  margin: 20px auto 0;
+  color: #a8a8a8;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ACCORDION */
+
+.accordion-gallery {
+  width: 100%;
+  max-width: 1400px;
+  height: 520px;
+  margin: auto;
+
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+/* CARD */
+
+.accordion-card {
+  position: relative;
+  flex: 1;
+
+  min-width: 80px;
+
+  border-radius: 28px;
+  overflow: hidden;
+
+  cursor: pointer;
+
+  background: #111;
+
+  isolation: isolate;
+
+  transition:
+    flex 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+/* RAINBOW BORDER */
+
+.rainbow-border {
+  position: absolute;
+  inset: 0;
+  padding: 3px;
+
+  border-radius: 28px;
+
+  background: linear-gradient(
+    120deg,
+    #ff0080,
+    #ff8a00,
+    #ffff00,
+    #00ff88,
+    #00c8ff,
+    #8b5cff,
+    #ff0080
+  );
+
+  background-size: 400% 400%;
+
+  animation: rainbowBorder 6s ease infinite;
+
+  z-index: 5;
+
+  pointer-events: none;
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+
+  mask-composite: exclude;
+}
+
+/* IMAGE */
+
+.accordion-card img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  position: absolute;
+  inset: 0;
+
+  filter: grayscale(40%) brightness(0.75);
+
+  transition:
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.6s ease;
+}
+
+/* DARK OVERLAY */
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 0.05) 70%
+    );
+
+  z-index: 2;
+
+  transition: 0.5s ease;
+}
+
+/* HOVER ACCORDION */
+
+.accordion-card:hover {
+  flex: 4;
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 25px 70px rgba(255, 0, 128, 0.18),
+    0 0 35px rgba(0, 255, 255, 0.12);
+}
+
+.accordion-card:hover img {
+  transform: scale(1.08);
+
+  filter:
+    grayscale(0%)
+    brightness(0.95)
+    saturate(1.2);
+}
+
+.accordion-card:hover .image-overlay {
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 0.05) 80%
+    );
+}
+
+/* MUSIC SYMBOL */
+
+.music-icon {
+  position: absolute;
+
+  top: 25px;
+  right: 25px;
+
+  width: 55px;
+  height: 55px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  backdrop-filter: blur(12px);
+
+  z-index: 4;
+
+  opacity: 0;
+  transform: scale(0.5);
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.music-icon span {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.accordion-card:hover .music-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* CARD CONTENT */
+
+.card-content {
+  position: absolute;
+
+  left: 25px;
+  right: 25px;
+  bottom: 25px;
+
+  z-index: 4;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  opacity: 0;
+
+  transform: translateY(25px);
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.accordion-card:hover .card-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-content h2 {
+  margin: 0;
+
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.card-content p {
+  margin: 6px 0 0;
+
+  color: #ddd;
+
+  font-size: 14px;
+}
+
+/* PLAY BUTTON */
+
+.play-button {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: white;
+  color: black;
+
+  font-size: 15px;
+
+  transition: 0.3s ease;
+}
+
+.play-button:hover {
+  transform: scale(1.15) rotate(5deg);
+
+  background: #ff0080;
+  color: white;
+}
+
+/* RAINBOW ANIMATIONS */
+
+@keyframes rainbowBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes rainbowText {
+  0% {
+    background-position: 0% center;
+  }
+
+  100% {
+    background-position: 300% center;
+  }
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
+  .music-section {
+    padding: 70px 4%;
+  }
+
+  .accordion-gallery {
+    height: 450px;
+  }
+
+  .accordion-card:hover {
+    flex: 2.5;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+  .section-heading h1 {
+    letter-spacing: -2px;
+  }
+
+  .accordion-gallery {
+    height: auto;
+
+    flex-direction: column;
+  }
+
+  .accordion-card {
+    height: 100px;
+    min-height: 100px;
+
+    flex: none;
+  }
+
+  .accordion-card:hover {
+    height: 300px;
+    flex: none;
+  }
+
+  .card-content {
+    opacity: 0;
+  }
+
+  .accordion-card:hover .card-content {
+    opacity: 1;
+  }
+
+  .music-icon {
+    top: 20px;
+    right: 20px;
+  }
+}
